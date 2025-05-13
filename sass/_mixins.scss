@@ -1,0 +1,75 @@
+@mixin colors($bg: null, $fg: null) {
+   @if $bg { background: $bg; }
+   @if $fg { color: $fg; } 
+}
+
+@mixin grid-layout(
+    $columns: null,
+    $rows: null,
+    $gap: null,
+    $padding: null,
+    $full-height: false,
+    $center-items: false
+) {
+    display: grid;
+    @if $columns { grid-template-columns: $columns; }
+    @if $rows { grid-template-rows: $rows; }
+    @if $gap { gap: $gap; }
+    @if $padding { padding: $padding; }
+    @if $full-height {
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+    @if $center-items { place-items: center; }
+}
+
+@mixin navbar(
+    $prefix: nav,
+    $gap: 0.5rem,
+    $padding: 1rem,
+    $border-width: 0.25rem,
+    $bg: false,
+    $bg-color: black,
+    $fg-color: white,
+    $padding-inline: 6,
+    $padding-block: 0.5,
+    $radius: 1rem
+) {
+    .#{$prefix}-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $gap;
+    }
+    .#{$prefix}-item {
+        flex: 1;
+        flex-basis: content;
+        padding-inline: $padding;
+        border-inline: $border-width solid currentColor;
+        text-align: center;
+    }
+    .#{$prefix}-link:hover {
+        text-decoration: underline;
+    }
+    
+    @if $bg {
+        background: $bg-color;
+        color: $fg-color;
+        padding-inline: calc(($padding-inline * 1vw) + 0.5rem);
+        padding-block: calc(($padding-block * 1vw) + ($padding-block * 1rem));
+        border-radius: $radius;
+    }
+}
+
+@mixin responsive-width(
+    $width,
+    $centered: true,
+    $margin: null,
+) {
+    @if $margin {
+        width: min($width, 100% - $width * 2);
+    }
+    @else {
+        width: min($width, 100%);
+    }
+    @if $centered { margin-inline: auto; }
+}

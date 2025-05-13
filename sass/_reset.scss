@@ -1,0 +1,39 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
+
+img, picture, svg, canvas, video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, textarea, select {
+    font: inherit;
+}

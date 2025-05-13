@@ -1,0 +1,69 @@
+@use "sass:map";
+
+@use 'node_modules/utopia-core-scss/src/utopia' as utopia;
+  
+@import url("https://use.typekit.net/wkr3jua.css");
+
+:root {
+  @include utopia.generateTypeScale((
+    "minWidth": 320,
+    "maxWidth": 1240,
+    "minFontSize": 18,
+    "maxFontSize": 20,
+    "minTypeScale": 1.1,
+    "maxTypeScale": 1.25,
+    "positiveSteps": 8,
+    "negativeSteps": 4,
+    "prefix": "font-size-",
+    "relativeTo": "viewport-width"
+  ));
+}
+
+$stacks: (
+  regular: (peridot-pe-variable, sans-serif),
+  display: (varietta-variable, sans-serif),
+  mono: (bakemono-variable, monospace)
+);
+
+$default-variations: (
+  regular: ("wdth": 100, "ital": 0),
+  display: ("wdth": 100, "CTOP": 100, "CBOT": 100),
+  mono: ("MONO": 1000)
+);
+
+@mixin set(
+  $stack: regular, 
+  $weight: 400, 
+  $size: 0, 
+  $width: null,
+  $mono: null,
+  $italic: null,
+  $contrast-top: null,
+  $contrast-bottom: null,
+  $defaults: false,
+) {
+
+  $current-variations: ();
+  
+  font-family: map.get($stacks, $stack);
+  font-weight: $weight;
+  font-size: var(--font-size-#{$size});
+  
+  @if $defaults and $stack and map.has-key($default-variations, $stack) {
+    $current-variations: map.merge($current-variations, map.get($default-variations, $stack));
+  }
+
+  @if $width { $current-variations: map.merge($current-variations, ("wdth": $width)); }
+  @if $mono { $current-variations: map.merge($current-variations, ("MONO": $mono)); }
+  @if $italic { $current-variations: map.merge($current-variations, ("ital": $italic)); }
+  @if $contrast-top { $current-variations: map.merge($current-variations, ("CTOP": $contrast-top)); }
+  @if $contrast-bottom { $current-variations: map.merge($current-variations, ("CBOT": $contrast-bottom)); }
+
+  @if map.keys($current-variations) != () {
+    $settings-string: "";
+    @each $axis, $value in $current-variations {
+      $settings-string: $settings-string + "\"#{$axis}\" #{$value}, ";
+    }
+    font-variation-settings: #{str-slice($settings-string, 1, str-length($settings-string) - 2)};
+  }
+}

@@ -1,0 +1,134 @@
+@use "sass:meta";
+
+@use "fonts" as font;
+@use "variables" as global;
+@use "mixins" as *;
+
+@layer reset, general, layout, utilities, theme;
+
+@layer reset {
+    @include meta.load-css("reset");
+}
+
+@layer general {
+    body {
+        @include font.set;
+        line-height: 1.5;
+        @include colors($bg: linear-gradient(
+            147deg,
+            hsl(200, 100%, 50%),
+            hsl(60, 80%, 80%)
+        ));
+    }
+    
+    h2, h3, h4, h5, h6, p {
+        margin-block: 1rem;
+    }
+    
+    main > *:first-child {
+        margin-top: 0;
+    }
+
+    main > *:last-child {
+        margin-bottom: 0;
+    }
+    
+    .page-title {
+        @include font.set($size: 3, $weight: 600);
+    }
+}
+
+@layer layout {
+    .landing-container {
+        @include grid-layout(
+            $rows: 1fr 1fr,
+            $gap: 1rem,
+            $padding: 0 0.5rem,
+            $full-height: true
+        );
+    }
+    
+    .landing-header {
+        place-self: end center;
+        
+        .header-text {
+            @include font.set(
+                $stack: display,
+                $defaults: true,
+                $size: 8,
+                $weight: 500,
+                $contrast-bottom: 0,
+                $width: 175
+            );
+            text-align: center;
+        }
+    }
+    
+    .landing-navigation {
+        place-self: start center;
+        @include navbar($bg: true);
+        @include font.set($size: 1);
+    }
+
+    .main-container {
+        @include grid-layout(
+            $rows: auto 1fr auto,
+            $gap: 1rem,
+            $full-height: true,
+        );
+
+        @media (width < global.$page-width) {
+            gap: 0;
+        }
+    }
+    
+    .main-header {
+        @include grid-layout(
+            $gap: 1rem,
+            $padding: 1rem,
+            $center-items: true
+        );
+        @include colors(black, white);
+        
+        
+        .header-text {
+            @include font.set($stack: display, $defaults: true, $size: 5, $weight: 600, $contrast-bottom: 0, $width: 175);
+            text-align: center;
+        }
+    }
+    
+    .main-navigation {
+        @include navbar;
+    }
+    
+    .main-content {
+        container-type: inline-size;
+
+        @include responsive-width(global.$page-width);
+        text-align: justify;
+        padding: 1rem;
+        @include colors(white, black);
+        border-radius: 1rem;
+        
+        p {
+            text-align: justify;
+        }
+        
+        @media (width < global.$page-width) {
+            border-radius: 0;
+        }
+        
+        @container (width < 20rem) {
+            p {
+                text-align: left;
+            }
+        }
+    }
+    
+    .main-footer {
+        @include font.set($stack: regular, $size: -1, $weight: 500);
+        text-align: center;
+        padding: 0.5rem 1rem;
+        @include colors(black, white);
+    }
+}
