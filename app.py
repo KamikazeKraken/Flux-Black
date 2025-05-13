@@ -39,3 +39,7 @@ def inject_globals():
 
 
 app.register_blueprint(blueprints.root)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
