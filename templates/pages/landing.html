@@ -1,0 +1,22 @@
+{% extends "shared/master.html" %}
+
+{% block body %}
+
+<div class="landing-container">
+    <header class="landing-header">
+        <h1 class="header-text">
+            {{ config.site_header }}
+        </h1>
+    </header>
+    <nav class="landing-navigation">
+        {{
+            render_partial(
+                "partials/link-list.html",
+                items=root_navigation,
+                prefix="nav"
+            )
+        }}
+    </nav>
+</div>
+
+{% endblock %}

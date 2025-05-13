@@ -1,0 +1,7 @@
+<ul class="{{ prefix }}-list">
+    {% for item in items %}
+    <li class="{{ prefix }}-item">
+        <a class="{{ prefex }}" href="{{ item.url }}">{{ item.title }}</a>
+    </li>
+    {% endfor %}
+</ul>

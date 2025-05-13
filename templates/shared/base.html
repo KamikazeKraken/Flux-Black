@@ -1,0 +1,32 @@
+{% extends "shared/master.html" %}
+
+{% block body %}
+
+<div class="main-container">
+    <header class="main-header">
+        <h1 class="header-text">
+            <a href="{{ landing_page }}" class="landing-link">
+                {{ config.site_header }}
+            </a>
+        </h1>
+        <nav class="main-navigation">
+            {{
+                render_partial(
+                    "partials/link-list.html",
+                    items=root_navigation,
+                    prefix="nav"
+                )
+            }}
+        </nav>
+    </header>
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="main-footer">
+        <span class="copyright">
+            Copyright &copy; {{ current_year }} {{ config.site_author }} &mdash; All Rights Reserved
+        </span>
+    </footer>
+</div>
+
+{% endblock %}
