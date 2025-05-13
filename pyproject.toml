@@ -1,0 +1,16 @@
+[project]
+name = "flux-black"
+version = "0.1.0"
+description = "My Personal Website"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "duckdb>=1.2.2",
+    "flask>=3.1.1",
+    "flask-login>=0.6.3",
+    "jinja-partials>=0.2.1",
+    "markdown>=3.8",
+    "pandas>=2.2.3",
+    "python-dotenv>=1.1.0",
+    "weasyprint>=65.1",
+]
