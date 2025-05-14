@@ -26,10 +26,10 @@ app = helpers.create_app("config.json")
 def inject_globals():
     root_navigation = [
         LinkItem("Home", url_for("root.index")),    
-        LinkItem("Socials", url_for("root.index")),    
-        LinkItem("Projects", url_for("root.index")),    
-        LinkItem("Blog", url_for("root.index")),    
-        LinkItem("Admin", url_for("root.index")),    
+        LinkItem("Socials", url_for("root.socials")),    
+        LinkItem("Projects", url_for("root.projects")),    
+        LinkItem("Blog", url_for("root.blog")),
+        LinkItem("Admin", url_for("root.admin")),    
     ]
     return {
         "current_hear": helpers.current_year,
