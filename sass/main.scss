@@ -132,3 +132,70 @@
         @include colors(black, white);
     }
 }
+
+@layer utilities {
+    .social-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+         
+        .social-item {
+            padding: 1rem;
+            background: black;
+            color: white;
+            border-radius: 0.5rem;
+        }
+        
+        .social-item:hover {
+            color: red;
+            cursor: pointer;
+        }
+        
+        .social-link {
+            text-decoration: underline;
+            text-underline-offset: 0.5rem;
+        }
+    }
+}
+
+@layer theme {
+    :root {
+        --color-light-1: white;
+        --color-dark-1: black;
+        --color-accent-light: blue;
+        --color-accent-dark: red;
+        --gradient-background: linear-gradient(
+            147deg,
+            hsl(200, 100%, 50%),
+            hsl(60, 80%, 80%)
+        );
+    } 
+    
+    .dark {
+        --bg-color: var(--color-dark-1);
+        --fg-color: var(--color-light-1);
+        --accent-color: var(--color-accent-dark);
+        --site-background: var(--gradient-background);
+    }
+    
+    .light {
+        --bg-color: var(--color-light-1);
+        --fg-color: var(--color-dark-1);
+        --accent-color: var(--color-accent-light);
+        --site-background: var(--gradient-background);
+    }
+    
+    .dark, .light {
+        @include colors(var(--bg-color), var(--fg-color));
+        
+        .accent { color: var(--accent-color); }
+        
+        .invert-bg {
+            background: var(--fg-color);
+        }
+        
+        .invert-fg {
+            background: var(--bg-color);
+        }
+    }
+}

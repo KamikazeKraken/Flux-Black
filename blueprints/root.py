@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from helpers import LinkItem
 
 
 bp = Blueprint(
@@ -17,7 +18,11 @@ def index():
 
 @bp.route("/socials")
 def socials():
-    return render_template("pages/socials.html")
+    socials = [
+        LinkItem("Reddit", "https://www.reddit.com/u/fluxkraken"),
+        LinkItem("X", "https://x.com/flux_kraken"),
+    ]
+    return render_template("pages/socials.html", socials=socials)
 
 @bp.route("/projects")
 def projects():
